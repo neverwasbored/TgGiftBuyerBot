@@ -47,7 +47,7 @@ Before running the bot, configure the settings in `config.py`:
 ```python
 def load_config():
     return {
-        "bot_token": '',
+        "bot_token": '7820577888:AAFH_YOr6-8uZDzfKnOEOfkMYaewp6J0QN0',
         "DATABASE_URL": 'sqlite:///user_data.db'
     }
 ```
