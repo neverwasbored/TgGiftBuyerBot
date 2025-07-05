@@ -49,12 +49,15 @@ class AutoBuySettings(Base):
     price_limit_to = Column(Integer, default=10**9, nullable=False)
     supply_limit = Column(Integer, default=10**9)
     cycles = Column(Integer, default=1, nullable=False)
-
+    
+    # Новое поле для фильтрации unlimited подарков
+    skip_unlimited = Column(Boolean, default=True, nullable=False)  # По умолчанию пропускаем unlimited
+    
     def __repr__(self):
         return (f"<AutoBuySettings(user_id={self.user_id}, status={self.status}, "
                 f"price_limit_from={self.price_limit_from}, price_limit_to={self.price_limit_to}, "
-                f"supply_limit={self.supply_limit}, cycles={self.cycles})>")
-
+                f"supply_limit={self.supply_limit}, cycles={self.cycles}, "
+                f"skip_unlimited={self.skip_unlimited})>")
 
 class Gift(Base):
     __tablename__ = "gifts"

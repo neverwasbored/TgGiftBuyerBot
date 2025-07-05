@@ -9,6 +9,7 @@ from bot.middlewares.db_session_middleware import DBSessionMiddleware
 from db import init_db
 from utils.logger import log
 from utils.gift_parser import start_gift_parsing_loop
+import os
 
 # Load configuration
 config = load_config()
@@ -36,6 +37,8 @@ async def main():
     Main entry point for starting the bot.
     """
     log.info("Starting bot...")
+    os.makedirs('logs', exist_ok=True)
+
 
     await on_startup()
 
