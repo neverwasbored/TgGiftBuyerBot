@@ -1,4 +1,5 @@
 import asyncio
+import OS
 
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
@@ -14,7 +15,7 @@ from utils.gift_parser import start_gift_parsing_loop
 config = load_config()
 
 # Initialize bot
-bot = Bot(token=config["bot_token"])
+bot = Bot(token=os.getenv("BOT_TOKEN"))
 dp = Dispatcher(storage=MemoryStorage())
 
 
