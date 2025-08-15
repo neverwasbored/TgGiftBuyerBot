@@ -6,3 +6,4 @@ user_data.db
 .cursorignore
 **/__pycache__/
 .idea/
+.env

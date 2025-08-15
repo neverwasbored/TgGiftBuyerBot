@@ -60,12 +60,6 @@ class PurchaseGift:
                 "gift_price": gift.star_count,
             }
 
-        user = await self.user_repo.debit_user_balance(buyer_telegram_id, amount)
-        if not user:
-            logger.error("[UseCase:PurchaseGift] Ошибка: debit_failed")
-            return {"ok": False, "error": "debit_failed"}
-        logger.info(f"[UseCase:PurchaseGift] Баланс после: {user.balance}")
-
         for _ in range(gifts_count):
             sent = await self.gifts_service.send_gift(
                 user_id=recipient_id, gift_id=gift_id
@@ -83,6 +77,12 @@ class PurchaseGift:
                     "error": "gift_send_failed",
                     "error_code": error_code,
                 }
+
+        user = await self.user_repo.debit_user_balance(buyer_telegram_id, amount)
+        if not user:
+            logger.error("[UseCase:PurchaseGift] Ошибка: debit_failed")
+            return {"ok": False, "error": "debit_failed"}
+        logger.info(f"[UseCase:PurchaseGift] Баланс после: {user.balance}")
 
         transaction = await self.transaction_repo.create(
             user_id=user.id,

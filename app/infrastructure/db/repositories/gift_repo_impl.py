@@ -82,7 +82,8 @@ class GiftRepository(IGiftRepository):
 
     async def reset_new_gift(self, gift_id: int):
         gift = await self.session.scalar(
-            select(GiftModel).where(GiftModel.gift_id == gift_id, GiftModel.is_new)
+            select(GiftModel).where(
+                GiftModel.gift_id == gift_id, GiftModel.is_new)
         )
         if gift:
             gift.is_new = False

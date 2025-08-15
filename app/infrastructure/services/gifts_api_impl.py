@@ -22,6 +22,7 @@ class TelegramGiftsApi:
                 return None
 
             gifts = data["result"]["gifts"]
+            logger.info(f"[GiftsApi] Получены подарки: {gifts}")
             logger.info(f"[GiftsApi] Получено подарков: {len(gifts)}")
             return [
                 GiftDTO(
