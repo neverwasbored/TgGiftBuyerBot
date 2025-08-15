@@ -181,7 +181,7 @@ Auto‑buy lets the bot find and purchase new gifts that match your criteria —
 
 - **Auto‑buy cycles**  
   Number of passes through the list of new gifts.  
-  Example: with 3 new gifts and 2 cycles the bot will make 4 purchases (2 × 2) as long as the balance is sufficient.
+  Example: with 3 new gifts, where 2 fit the filters, and 2 cycles, the bot will make 4 purchases (2x2), as long as there is enough balance.
 
 ---
 
