@@ -107,8 +107,10 @@ class AutoBuyGiftsForAllUsers:
                     f"[AutoBuyGifts] Не удалось отправить уведомление {user.telegram_id}: {e}"
                 )
 
-            for gift in suitable:
-                for cycle in range(settings.cycles):
+            for cycle in range(settings.cycles):
+                for gift in suitable:
+                    if cycle > 0:
+                        time.sleep(settings.cycle_delay)
                     logger.info(
                         f"[AutoBuyGifts] Попытка купить подарок {gift.gift_id} для пользователя {user.telegram_id}, цикл {cycle}, баланс {user.balance}"
                     )
