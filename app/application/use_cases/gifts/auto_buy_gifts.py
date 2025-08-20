@@ -44,6 +44,12 @@ class AutoBuyGiftsForAllUsers:
         users_settings = (
             await self.user_repo.get_all_with_auto_buy_enabled_and_settings()
         )
+
+        if not users_settings:
+            logger.info(
+                "[UseCase:AutoBuyGifts] Нет пользователей с включенной автопокупкой")
+            return
+
         gifts = await self.gift_repo.get_new_gifts()
 
         logger.info(
@@ -109,8 +115,6 @@ class AutoBuyGiftsForAllUsers:
 
             for cycle in range(settings.cycles):
                 for gift in suitable:
-                    if cycle > 0:
-                        time.sleep(settings.cycle_delay)
                     logger.info(
                         f"[AutoBuyGifts] Попытка купить подарок {gift.gift_id} для пользователя {user.telegram_id}, цикл {cycle}, баланс {user.balance}"
                     )

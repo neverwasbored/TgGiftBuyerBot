@@ -2,7 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.logger import logger
-from app.domain.entities import UserDTO
+from app.domain.entities import UserDTO, AutoBuySettingDTO
 from app.infrastructure.db.models import UserModel
 from app.interfaces.repositories import IUserRepository
 
@@ -126,7 +126,8 @@ class UserRepository(IUserRepository):
             .where(AutoBuySettingModel.status)
         )
         users = result.all()
-        logger.info(f"[UserRepo] Пользователей с автопокупкой (всего): {len(users)}")
+        logger.info(
+            f"[UserRepo] Пользователей с автопокупкой (всего): {len(users)}")
         return [
             UserDTO(
                 id=u.id,
@@ -142,7 +143,7 @@ class UserRepository(IUserRepository):
 
     async def get_all_with_auto_buy_enabled_and_settings(
         self,
-    ) -> list[tuple[UserDTO, object]]:
+    ) -> list[tuple[UserDTO, AutoBuySettingDTO]]:
         from app.infrastructure.db.models.auto_buy_setting import AutoBuySettingModel
         from app.domain.entities.auto_buy_setting import AutoBuySettingDTO
 

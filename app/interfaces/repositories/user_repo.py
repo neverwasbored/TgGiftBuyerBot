@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from app.domain.entities import UserDTO
+from app.domain.entities import UserDTO, AutoBuySettingDTO
 
 
 class IUserRepository(ABC):
@@ -8,7 +8,8 @@ class IUserRepository(ABC):
     async def create(self, telegram_id: int, username: str) -> UserDTO: ...
 
     @abstractmethod
-    async def get_user_by_telegram_id(self, telegram_id: int) -> UserDTO | None: ...
+    async def get_user_by_telegram_id(
+        self, telegram_id: int) -> UserDTO | None: ...
 
     @abstractmethod
     async def get_user_by_id(self, user_id: int) -> UserDTO | None: ...
@@ -36,5 +37,11 @@ class IUserRepository(ABC):
 
     @abstractmethod
     async def get_language(self, telegram_id: int) -> str: ...
+
     @abstractmethod
     async def set_language(self, telegram_id: int, lang: str) -> None: ...
+
+    @abstractmethod
+    async def get_all_with_auto_buy_enabled_and_settings(
+        self,
+    ) -> list[tuple[UserDTO, AutoBuySettingDTO]]: ...
